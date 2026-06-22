@@ -73,10 +73,8 @@ namespace LoginScreen
             this.lblError.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.lblError.ForeColor = Color.Red;
             this.lblError.Location = new Point(120, 255);
-            //this.lblError.Location = new Point(95, 255);
             this.lblError.Name = "lblError";
             this.lblError.Size = new Size(350, 25);
-            //this.lblError.Size = new Size(280, 25);
             this.lblError.TabIndex = 3;
             this.lblError.Text = "아이디 또는 비밀번호가 맞지 않습니다.";
             this.lblError.TextAlign = ContentAlignment.MiddleLeft;

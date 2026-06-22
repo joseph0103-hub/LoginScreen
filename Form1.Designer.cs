@@ -1,14 +1,15 @@
-﻿namespace LoginScreen
+namespace LoginScreen
 {
     partial class Form1
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.IContainer? components = null;
 
+        
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,88 +24,89 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            lblAppName = new Label();
-            txtID = new TextBox();
-            btnLogin = new Button();
-            txtPW = new TextBox();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.lblTitle = new Label();
+            this.txtId = new TextBox();
+            this.txtPassword = new TextBox();
+            this.btnLogin = new Button();
+            this.SuspendLayout();
             // 
-            // lblAppName
+            // lblTitle
             // 
-            lblAppName.Font = new Font("맑은 고딕", 36F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblAppName.Location = new Point(253, 26);
-            lblAppName.Name = "lblAppName";
-            lblAppName.Size = new Size(218, 70);
-            lblAppName.TabIndex = 0;
-            lblAppName.Text = "  Login";
-            lblAppName.Click += label1_Click;
+            this.lblTitle.Font = new Font("맑은 고딕", 28F, FontStyle.Regular, GraphicsUnit.Point);
+            this.lblTitle.Location = new Point(120, 40);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new Size(320, 70);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Login";
+            this.lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // txtID
+            // txtId
             // 
-            txtID.Font = new Font("맑은 고딕", 24F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            txtID.ForeColor = Color.Silver;
-            txtID.Location = new Point(117, 121);
-            txtID.Multiline = true;
-            txtID.Name = "txtID";
-            txtID.Size = new Size(500, 62);
-            txtID.TabIndex = 2;
-            txtID.Text = "아이디";
-            txtID.TextChanged += txtID_TextChanged;
-            txtID.Enter += txtID_Enter;
-            txtID.Leave += txtID_Leave;
+            this.txtId.Font = new Font("맑은 고딕", 17F, FontStyle.Regular, GraphicsUnit.Point);
+            this.txtId.Location = new Point(120, 135);
+            this.txtId.ForeColor = Color.Gray;
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new Size(320, 45);
+            this.txtId.TabIndex = 1;
+            this.txtId.Text = "아이디 입력";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new Font("맑은 고딕", 17F, FontStyle.Regular, GraphicsUnit.Point);
+            this.txtPassword.Location = new Point(120, 205);
+            this.txtPassword.ForeColor = Color.Gray;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new Size(320, 45);
+            this.txtPassword.TabIndex = 2;
+            this.txtPassword.Text = "패스워드 입력";
+            this.txtPassword.UseSystemPasswordChar = false;
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.FromArgb(255, 128, 255);
-            btnLogin.Font = new Font("맑은 고딕", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            btnLogin.ForeColor = Color.Purple;
-            btnLogin.Location = new Point(253, 324);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(221, 79);
-            btnLogin.TabIndex = 1;
-            btnLogin.Text = "로그인";
-            btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += btnLogin_Click;
-            // 
-            // txtPW
-            // 
-            txtPW.Font = new Font("맑은 고딕", 24F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            txtPW.ForeColor = Color.Silver;
-            txtPW.Location = new Point(117, 204);
-            txtPW.Multiline = true;
-            txtPW.Name = "txtPW";
-            txtPW.Size = new Size(500, 62);
-            txtPW.TabIndex = 3;
-            txtPW.Text = "패스워드";
-            txtPW.TextChanged += txtPW_TextChanged;
-            txtPW.Enter += txtPW_Enter;
-            txtPW.Leave += txtPW_Leave;
+            this.btnLogin.BackColor = Color.LightCyan;
+            this.btnLogin.FlatAppearance.BorderColor = Color.PowderBlue;
+            this.btnLogin.FlatAppearance.BorderSize = 1;
+            this.btnLogin.FlatStyle = FlatStyle.Flat;
+            this.btnLogin.Font = new Font("맑은 고딕", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            this.btnLogin.ForeColor = Color.RoyalBlue;
+            this.btnLogin.Location = new Point(210, 285);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new Size(140, 52);
+            this.btnLogin.TabIndex = 3;
+            this.btnLogin.Text = "로그인";
+            this.btnLogin.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(716, 450);
-            Controls.Add(txtPW);
-            Controls.Add(btnLogin);
-            Controls.Add(txtID);
-            Controls.Add(lblAppName);
-            Name = "Form1";
-            Text = "Form1";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new SizeF(9F, 20F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.WhiteSmoke;
+            this.ClientSize = new Size(560, 430);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.lblTitle);
+            this.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "Form1";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.Text = "Login Screen";
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
 
-        private Label lblAppName;
-        private TextBox txtID;
+        private Label lblTitle;
+        private TextBox txtId;
+        private TextBox txtPassword;
         private Button btnLogin;
-        private TextBox txtPW;
     }
 }

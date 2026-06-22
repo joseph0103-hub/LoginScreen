@@ -1,86 +1,126 @@
+using System;
+using System.Drawing;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+
 namespace LoginScreen
 {
     public partial class Form1 : Form
     {
+        private const string ValidId = "superman";
+        private const string ValidPassword = "1234!";
+
+        private bool isIdPlaceholderActive = true;
+        private bool isPasswordPlaceholderActive = true;
+
         public Form1()
         {
             InitializeComponent();
+            WireEvents();
+            ApplyIdPlaceholder();
+            ApplyPasswordPlaceholder();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void WireEvents()
         {
-
+            txtId.Enter += (_, _) => RemoveIdPlaceholderIfNeeded();
+            txtId.Leave += (_, _) => ApplyIdPlaceholderIfNeeded();
+            txtPassword.Enter += (_, _) => RemovePasswordPlaceholderIfNeeded();
+            txtPassword.Leave += (_, _) => ApplyPasswordPlaceholderIfNeeded();
+            btnLogin.Click += (_, _) => AttemptLogin();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void ApplyIdPlaceholder()
         {
-
+            isIdPlaceholderActive = true;
+            txtId.ForeColor = Color.Gray;
+            txtId.Text = "아이디 입력";
         }
 
-        private void txtID_TextChanged(object sender, EventArgs e)
+        private void ApplyPasswordPlaceholder()
         {
-
+            isPasswordPlaceholderActive = true;
+            txtPassword.ForeColor = Color.Gray;
+            txtPassword.UseSystemPasswordChar = false;
+            txtPassword.Text = "패스워드 입력";
         }
 
-        private void txtPW_TextChanged(object sender, EventArgs e)
+        private void RemoveIdPlaceholderIfNeeded()
         {
-
-        }
-
-        private void txtID_Enter(object sender, EventArgs e)
-        {
-            if (txtID.Text == "아이디")
+            if (!isIdPlaceholderActive)
             {
-                txtID.Text = "";
-                txtID.ForeColor = Color.Black;
+                return;
             }
+
+            isIdPlaceholderActive = false;
+            txtId.Text = string.Empty;
+            txtId.ForeColor = Color.Black;
         }
 
-        private void txtID_Leave(object sender, EventArgs e)
+        private void RemovePasswordPlaceholderIfNeeded()
         {
-            if (string.IsNullOrWhiteSpace(txtID.Text))
+            if (!isPasswordPlaceholderActive)
             {
-                txtID.Text = "아이디";
-                txtID.ForeColor = Color.Silver;
+                return;
             }
+
+            isPasswordPlaceholderActive = false;
+            txtPassword.Text = string.Empty;
+            txtPassword.ForeColor = Color.Black;
+            UpdatePasswordMask();
         }
 
-        private void txtPW_Enter(object sender, EventArgs e)
+        private void ApplyIdPlaceholderIfNeeded()
         {
-            if (txtPW.Text == "패스워드")
+            if (!string.IsNullOrWhiteSpace(txtId.Text))
             {
-                txtPW.Text = "";
-                txtPW.ForeColor = Color.Black;
-                txtPW.UseSystemPasswordChar = true;
+                return;
             }
+
+            ApplyIdPlaceholder();
         }
 
-        private void txtPW_Leave(object sender, EventArgs e)
+        private void ApplyPasswordPlaceholderIfNeeded()
         {
-            if (string.IsNullOrWhiteSpace(txtPW.Text))
+            if (!string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                txtPW.Text = "패스워드";
-                txtPW.ForeColor = Color.Silver;
-                txtPW.UseSystemPasswordChar = false;
+                return;
             }
+
+            ApplyPasswordPlaceholder();
         }
 
-        string myID = "admin";
-        string myPW = "superman";
-
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void UpdatePasswordMask()
         {
-            string inputID = txtID.Text;
-            string inputPW = txtPW.Text;
+            if (isPasswordPlaceholderActive)
+            {
+                txtPassword.UseSystemPasswordChar = false;
+                return;
+            }
 
-            if (inputID == myID && inputPW == myPW)
-            {
-                MessageBox.Show("로그인 성공!");
-            }
-            else
-            {
-                MessageBox.Show("로그인 실패~");
-            }
+            txtPassword.UseSystemPasswordChar = true;
         }
+
+        private string CurrentId => isIdPlaceholderActive ? string.Empty : txtId.Text.Trim();
+
+        private string CurrentPassword => isPasswordPlaceholderActive ? string.Empty : txtPassword.Text;
+
+        private void AttemptLogin()
+        {
+            if (string.IsNullOrWhiteSpace(CurrentId) || string.IsNullOrWhiteSpace(CurrentPassword))
+            {
+                MessageBox.Show("아이디와 비밀번호를 모두 입력해 주세요.", "입력 확인", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (CurrentId == ValidId && CurrentPassword == ValidPassword)
+            {
+                MessageBox.Show("로그인 성공", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            MessageBox.Show("아이디 또는 비밀번호가 올바르지 않습니다.", "로그인 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 }

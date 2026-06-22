@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LoginScreen
@@ -19,6 +18,7 @@ namespace LoginScreen
             WireEvents();
             ApplyIdPlaceholder();
             ApplyPasswordPlaceholder();
+            txtId.Focus();
         }
 
         private void WireEvents()
@@ -26,10 +26,39 @@ namespace LoginScreen
             txtId.Enter += (_, _) => RemoveIdPlaceholderIfNeeded();
             txtId.Leave += (_, _) => ApplyIdPlaceholderIfNeeded();
             txtId.TextChanged += (_, _) => HideErrorMessage();
+            txtId.KeyDown += TxtId_KeyDown;
+
             txtPassword.Enter += (_, _) => RemovePasswordPlaceholderIfNeeded();
             txtPassword.Leave += (_, _) => ApplyPasswordPlaceholderIfNeeded();
             txtPassword.TextChanged += (_, _) => HideErrorMessage();
+            txtPassword.KeyDown += TxtPassword_KeyDown;
+
             btnLogin.Click += (_, _) => AttemptLogin();
+            btnClear.Click += (_, _) => ClearAllInputs();
+            chkShowPassword.CheckedChanged += (_, _) => UpdatePasswordMask();
+        }
+
+        private void TxtId_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            RemovePasswordPlaceholderIfNeeded();
+            txtPassword.Focus();
+        }
+
+        private void TxtPassword_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            AttemptLogin();
         }
 
         private void ApplyIdPlaceholder()
@@ -100,7 +129,7 @@ namespace LoginScreen
                 return;
             }
 
-            txtPassword.UseSystemPasswordChar = true;
+            txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
         private string CurrentId => isIdPlaceholderActive ? string.Empty : txtId.Text.Trim();
@@ -126,6 +155,15 @@ namespace LoginScreen
             ShowErrorMessage("아이디 또는 비밀번호가 맞지 않습니다.");
         }
 
+        private void ClearAllInputs()
+        {
+            HideErrorMessage();
+            chkShowPassword.Checked = false;
+            ApplyIdPlaceholder();
+            ApplyPasswordPlaceholder();
+            txtId.Focus();
+        }
+
         private void ShowErrorMessage(string message)
         {
             lblError.Text = message;
@@ -136,6 +174,5 @@ namespace LoginScreen
         {
             lblError.Visible = false;
         }
-
     }
 }

@@ -25,8 +25,10 @@ namespace LoginScreen
         {
             txtId.Enter += (_, _) => RemoveIdPlaceholderIfNeeded();
             txtId.Leave += (_, _) => ApplyIdPlaceholderIfNeeded();
+            txtId.TextChanged += (_, _) => HideErrorMessage();
             txtPassword.Enter += (_, _) => RemovePasswordPlaceholderIfNeeded();
             txtPassword.Leave += (_, _) => ApplyPasswordPlaceholderIfNeeded();
+            txtPassword.TextChanged += (_, _) => HideErrorMessage();
             btnLogin.Click += (_, _) => AttemptLogin();
         }
 
@@ -107,9 +109,11 @@ namespace LoginScreen
 
         private void AttemptLogin()
         {
+            HideErrorMessage();
+
             if (string.IsNullOrWhiteSpace(CurrentId) || string.IsNullOrWhiteSpace(CurrentPassword))
             {
-                MessageBox.Show("아이디와 비밀번호를 모두 입력해 주세요.", "입력 확인", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ShowErrorMessage("아이디와 비밀번호를 모두 입력해 주세요.");
                 return;
             }
 
@@ -119,7 +123,18 @@ namespace LoginScreen
                 return;
             }
 
-            MessageBox.Show("아이디 또는 비밀번호가 올바르지 않습니다.", "로그인 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ShowErrorMessage("아이디 또는 비밀번호가 맞지 않습니다.");
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            lblError.Text = message;
+            lblError.Visible = true;
+        }
+
+        private void HideErrorMessage()
+        {
+            lblError.Visible = false;
         }
 
     }

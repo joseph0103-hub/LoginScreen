@@ -6,6 +6,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>LoginScreen</AssemblyName>
-    <RootNamespace>LoginScreen_Assignment1</RootNamespace>
+    <RootNamespace>LoginScreen</RootNamespace>
   </PropertyGroup>
 </Project>

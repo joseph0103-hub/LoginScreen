@@ -34,6 +34,7 @@ namespace LoginScreen
             this.txtId = new TextBox();
             this.txtPassword = new TextBox();
             this.btnLogin = new Button();
+            this.lblError = new Label();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -67,6 +68,20 @@ namespace LoginScreen
             this.txtPassword.Text = "패스워드 입력";
             this.txtPassword.UseSystemPasswordChar = false;
             // 
+            // lblError
+            // 
+            this.lblError.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            this.lblError.ForeColor = Color.Red;
+            this.lblError.Location = new Point(120, 255);
+            //this.lblError.Location = new Point(95, 255);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new Size(350, 25);
+            //this.lblError.Size = new Size(280, 25);
+            this.lblError.TabIndex = 3;
+            this.lblError.Text = "아이디 또는 비밀번호가 맞지 않습니다.";
+            this.lblError.TextAlign = ContentAlignment.MiddleLeft;
+            this.lblError.Visible = false;
+            // 
             // btnLogin
             // 
             this.btnLogin.BackColor = Color.LightCyan;
@@ -75,10 +90,10 @@ namespace LoginScreen
             this.btnLogin.FlatStyle = FlatStyle.Flat;
             this.btnLogin.Font = new Font("맑은 고딕", 16F, FontStyle.Regular, GraphicsUnit.Point);
             this.btnLogin.ForeColor = Color.RoyalBlue;
-            this.btnLogin.Location = new Point(210, 285);
+            this.btnLogin.Location = new Point(210, 300);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new Size(140, 52);
-            this.btnLogin.TabIndex = 3;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "로그인";
             this.btnLogin.UseVisualStyleBackColor = false;
             // 
@@ -89,6 +104,7 @@ namespace LoginScreen
             this.BackColor = Color.WhiteSmoke;
             this.ClientSize = new Size(560, 430);
             this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.lblTitle);
@@ -108,5 +124,6 @@ namespace LoginScreen
         private TextBox txtId;
         private TextBox txtPassword;
         private Button btnLogin;
+        private Label lblError;
     }
 }
